@@ -1,96 +1,129 @@
 # DixitCoder Security Dashboard
 
-A large Vue 3 and TypeScript dashboard project that brings workspace dashboards, account screens, reusable UI, developer utilities, system diagnostics, and security-tool interfaces into one application.
+A full-stack Vue 3, TypeScript, and Node.js dashboard that brings workspace management, system diagnostics, developer utilities, and security-related tools into one interface.
 
-> **Public-repository scope:** this repository contains the frontend source and its visual assets. The backend/API source is intentionally not published here. The project is therefore a substantial UI preview, not a complete standalone deployment: authentication, user management, and API-powered tools need a separately operated backend.
+> **Use responsibly:** security and network checks can contact the host or service entered in a tool. Run checks only against systems you own or have explicit permission to assess. Do not expose an unreviewed development server to the internet.
 
 ## Project at a glance
 
-- **62 route definitions** in the Vue Router, including public sign-in/sign-up and fallback routes.
-- **59 Vue view files** covering dashboards, tools, forms, charts, and account pages.
-- **56 reusable Vue components** for layouts, navigation, charts, tables, forms, and common UI.
-- A Vite-powered Vue 3 + TypeScript frontend with a modular, lazy-loaded route structure.
+- **62 Vue Router route definitions** for dashboards, utilities, account pages, and UI examples.
+- **59 Vue view files** and **56 reusable Vue components** in the current frontend source tree.
+- A Vue/Vite frontend with an Express API server.
+- Server-validated sign-in, administrator-managed accounts, and an API health check.
+- A modular layout with separate frontend views, shared components, and backend route modules.
 
-Counts describe the current source tree; they are not a claim that every screen or service is fully operational.
+Counts describe source files and routes, not the number of services independently tested or guaranteed to work in every environment.
 
-## Visual preview
+## Preview
 
-The shared browser session currently shows the sign-in page. An authenticated dashboard screenshot is not included because it requires a valid local account.
+The image below shows the sign-in page. Other pages require a configured backend and a valid account.
 
 ![DixitCoder Security Dashboard sign-in screen](./public/images/readme-signin-preview.png)
 
-## What's inside
+## What can I do with it?
 
-### Dashboards and workspace
+### Dashboard and workspace
 
-- Main workspace dashboard with API status, recent navigation, saved activity, and quick-launch areas.
-- Security overview and security-center screens.
-- Search/navigation, theme preferences, profile, calendar, and settings interfaces.
+- Review the main dashboard, API availability, recent navigation, saved scan activity, and quick-launch links.
+- Use the Security Dashboard and Security Center to organize authorized assets, track findings, and maintain local reminders.
+- Manage workspace preferences, themes, profile details, calendar items, and administrator-managed user accounts.
 
-### Network and security interfaces
+### Network and system diagnostics
 
-- IP information, ping sweep, port/service scanner, network mapper, and scan-history screens.
-- Traceroute, GeoIP, packet-capture, bandwidth, router, and network-statistics interfaces.
-- WHOIS, DNS records, DNS privacy, SSL/TLS, HTTP security headers, firewall, and website-monitor screens.
-- Web-scan and vulnerability-scan interfaces.
+- Inspect local system and network information, CPU activity, network statistics, processes, and ARP entries.
+- Use the IP information, ping, port/service, network-map, router, traceroute, GeoIP, bandwidth, and packet-capture interfaces.
+- Check file integrity and view port-forwarding information.
 
-These are frontend interfaces. Their presence does not mean an API is available or that every function has been tested. Use security and network features only on systems for which you have explicit authorization.
+### Website and security checks
 
-### System and developer utilities
+- Review WHOIS and DNS records, SSL/TLS information, HTTP security headers, DNS privacy, firewall behavior, and website monitor status.
+- Open the web-scan and vulnerability-scan interfaces and review their results or scan history.
 
-- System information, CPU monitoring, process listing, ARP, port-forwarding, and file-integrity screens.
-- Base64, hash, JSON-formatting, regular-expression, and API-diagnostics interfaces.
-- Image-analysis, charts, tables, form elements, and a set of reusable UI-element examples.
+### Developer utilities and dashboard UI
 
-### Shared frontend building blocks
+- Encode/decode Base64; generate hashes; format JSON; test regular expressions; and inspect API health.
+- Browse image-analysis interfaces, charts, tables, reusable form controls, alerts, badges, and other UI examples.
 
-- Responsive admin and full-screen layouts with sidebar/header navigation.
-- Reusable form controls, modals, alerts, badges, tables, and profile cards.
-- Chart widgets, dashboard cards, image components, theme controls, and route-aware breadcrumbs.
-- Client-side preferences for recently visited pages, favorites, and scan history.
+Some screens depend on a working backend, local operating-system capabilities, network access, and tool-specific permissions. Android APK generation and remote-handler endpoints are intentionally disabled. A screen being present does not guarantee its service is enabled.
 
-## Technology
+## First-time setup
 
-- Vue 3, TypeScript, Vue Router, and Vuex
-- Vite and Tailwind CSS
-- Axios for frontend API requests
-- ApexCharts and reusable chart components
+### Requirements
 
-## Run the frontend preview
+- Node.js 18 or later
+- npm
 
-Requirements: Node.js 18 or later and npm.
+### Install dependencies
+
+From the project root:
 
 ```bash
 npm install
-npm run frontend
+npm --prefix server install
 ```
 
-Open the local address printed by Vite (typically `http://127.0.0.1:5173`). You can inspect the public sign-in/sign-up screens and frontend assets. Protected pages redirect to sign-in unless a separately configured backend recognizes a valid session.
+### Configure the local administrator
 
-Create and type-check the frontend production build with:
+1. Copy `.env.example` to `.env` in the project root.
+2. Set `AUTH_USERNAME` to the initial administrator username.
+3. Set `AUTH_PASSWORD_HASH` to a **scrypt password hash** in this format: `scrypt$<salt>$<128-character-hex-hash>`. The server does not accept a plaintext password in this setting.
+4. Set `AUTH_SESSION_SECRET` to a newly generated random value of at least 32 characters.
+5. Keep `.env` private. Do not commit it, share it, or reuse the sample placeholder values.
+
+The initial administrator account is created from these settings when the local user store is first initialized. Self-service sign-up is disabled; administrators create and manage accounts in User Management.
+
+### Start the dashboard and API
+
+From the project root:
+
+```bash
+npm run dev
+```
+
+This starts the Vite frontend (typically `http://127.0.0.1:5173`) and the Express API (default `http://127.0.0.1:3001`). Keep the terminal running. Open the Vite address, sign in with the administrator account configured above, and use the sidebar or search to open a dashboard or tool.
+
+The API health endpoint is `http://127.0.0.1:3001/api/health`. A healthy response confirms only that the API process responds; it does not prove that every route or integration works.
+
+## How to use the tools
+
+1. Sign in to your local workspace.
+2. Open the relevant tool from the sidebar or dashboard search.
+3. Before any network or website check, confirm the target is within your written authorization and scope.
+4. Enter only the required information, run the check, and review the result and any errors.
+5. Use Scan History or Security Center to review locally saved activity where supported.
+
+Some utilities inspect the computer or network running the backend, rather than the browser device. Packet capture and other system-level checks may require operating-system permissions and may not work on every platform.
+
+## Run frontend checks
+
+Create a production frontend build and run the TypeScript checks:
 
 ```bash
 npm run build
 ```
 
-To preview the generated build locally:
+Preview the generated frontend build locally:
 
 ```bash
 npm run preview
 ```
 
-## Backend and service availability
+These commands validate/build the frontend; they are not an end-to-end test of all backend routes, external services, or network tools.
 
-This public repository does **not** contain the server/API source. Cloning it alone cannot start the API, authenticate users, manage accounts, or run API-backed tools. A separately operated backend must provide the API routes expected by the frontend and be configured for the frontend origin.
+## Privacy and data
 
-A backend health endpoint may report that its process is reachable; this alone does not verify each route, integration, or feature. The frontend build passing likewise verifies compilation, not end-to-end service behavior.
+- `.env` contains local authentication secrets and must stay private.
+- The backend creates its local account store at `server/data/users.json`; do not publish account data or password hashes.
+- User-uploaded files in `server/uploads/` may contain personal information.
+- Dashboard preferences and some activity records are stored in the browser on the local device.
 
-## Privacy and responsible use
+## Technology
 
-- Never publish `.env`, credentials, session secrets, password hashes, user records, or uploaded files.
-- Do not expose an unreviewed development server to the internet.
-- Only test systems and data you own or have explicit permission to assess.
+- Vue 3, TypeScript, Vue Router, and Vuex
+- Vite and Tailwind CSS
+- Node.js and Express
+- Axios, ApexCharts, and dashboard component libraries
 
 ## Third-party notices
 
-This project is customized from an existing Vue dashboard template and includes third-party components and assets. Retain applicable notices and comply with the licenses of all included work.
+This project is customized from an existing Vue dashboard template and includes third-party components and assets. Retain applicable notices and comply with the licenses of included work.
