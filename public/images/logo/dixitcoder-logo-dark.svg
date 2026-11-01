@@ -1,0 +1,26 @@
+<svg width="260" height="52" viewBox="0 0 260 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="neon" x1="5" y1="4" x2="43" y2="45" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D946EF"/>
+      <stop offset="0.52" stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="code" x1="211" y1="14" x2="255" y2="39" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D946EF"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <path d="M8 5H30L43 17V34L30 46H9L23 32H29L34 28V21L29 16H17L22 23L16 29L4 42L7 19L8 5Z" stroke="url(#neon)" stroke-width="3" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M14 39L24 29H31L23 39H14Z" fill="#8B5CF6"/>
+  <text x="53" y="36" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="27" font-style="italic" font-weight="800" letter-spacing="-1.4">Dixit</text>
+  <text x="116" y="36" fill="#22D3EE" font-family="Arial, Helvetica, sans-serif" font-size="27" font-style="italic" font-weight="800" letter-spacing="-1.4">Coder</text>
+  <path d="M218 19L208 26L218 33M246 19L256 26L246 33M239 16L225 36" stroke="url(#code)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M54 45H190L196 49H209" stroke="url(#neon)" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>
+</svg>

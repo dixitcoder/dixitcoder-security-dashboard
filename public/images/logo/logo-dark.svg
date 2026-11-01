@@ -1,0 +1,5 @@
+<svg width="231" height="48" viewBox="0 0 231 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="48" height="48" rx="12" fill="#465FFF"/>
+  <path d="M14 12V36M24 18V36M34 15V36" stroke="white" stroke-width="4.5" stroke-linecap="round"/>
+  <text x="62" y="32" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">DixitCoder</text>
+</svg>
