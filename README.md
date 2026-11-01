@@ -14,11 +14,25 @@ A full-stack Vue 3, TypeScript, and Node.js dashboard that brings workspace mana
 
 Counts describe source files and routes, not the number of services independently tested or guaranteed to work in every environment.
 
-## Preview
+## UI screenshots
 
-The image below shows the sign-in page. Other pages require a configured backend and a valid account.
+These are representative screens captured from the running local app: sign-in, a security overview, the local Security Center, and a developer utility. They are examples, not screenshots of every route. The dashboard screens show an empty local workspace; personal user-directory and profile pages are intentionally not included.
+
+### Sign in
 
 ![DixitCoder Security Dashboard sign-in screen](./public/images/readme-signin-preview.png)
+
+### Security overview
+
+![DixitCoder Security Dashboard security overview](./public/images/security-dashboard-preview.png)
+
+### Security Center
+
+![DixitCoder Security Center local workspace](./public/images/security-center-preview.png)
+
+### Developer utility
+
+![Base64 encoder and decoder interface](./public/images/developer-tools-preview.png)
 
 ## What can I do with it?
 
